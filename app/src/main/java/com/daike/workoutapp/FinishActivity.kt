@@ -2,7 +2,13 @@ package com.daike.workoutapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.daike.workoutapp.databinding.ActivityFinishBinding
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class FinishActivity : AppCompatActivity() {
 
@@ -26,6 +32,27 @@ class FinishActivity : AppCompatActivity() {
 
         binding?.btnFinish?.setOnClickListener{
             finish()
+        }
+
+        val dao = (application as WorkOutApp).db.historyDao()
+        addDateToDatabase(dao)
+    }
+
+    private fun addDateToDatabase(historyDao: HistoryDao){
+
+        val c = Calendar.getInstance()
+        val dateTime = c.time
+        Log.e("Date", "" +dateTime)
+
+        val sdf = SimpleDateFormat("dd MM yyyy HH:mm:ss", Locale.getDefault())
+        val date = sdf.format(dateTime)
+
+        lifecycleScope.launch {
+            historyDao.insert(HistoryEntity(date))
+            Log.e(
+                "Date: ",
+                "Added: "
+            )
         }
     }
 }
