@@ -7,51 +7,47 @@ import androidx.lifecycle.lifecycleScope
 import com.daike.workoutapp.databinding.ActivityFinishBinding
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
-
+import java.util.*
 class FinishActivity : AppCompatActivity() {
-
     private var binding: ActivityFinishBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_finish)
         binding = ActivityFinishBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
-
         setSupportActionBar(binding?.toolbarFinishActivity)
-
-        if (supportActionBar != null){
+        if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-
-        binding?.toolbarFinishActivity?.setNavigationOnClickListener{
+        binding?.toolbarFinishActivity?.setNavigationOnClickListener {
             onBackPressed()
         }
-
-        binding?.btnFinish?.setOnClickListener{
+        binding?.btnFinish?.setOnClickListener {
             finish()
         }
+
 
         val dao = (application as WorkOutApp).db.historyDao()
         addDateToDatabase(dao)
     }
 
-    private fun addDateToDatabase(historyDao: HistoryDao){
 
-        val c = Calendar.getInstance()
-        val dateTime = c.time
-        Log.e("Date", "" +dateTime)
+    private fun addDateToDatabase(historyDao: HistoryDao) {
 
-        val sdf = SimpleDateFormat("dd MM yyyy HH:mm:ss", Locale.getDefault())
-        val date = sdf.format(dateTime)
+        val c = Calendar.getInstance() // Calendars Current Instance
+        val dateTime = c.time // Current Date and Time of the system.
+        Log.e("Date : ", "" + dateTime) // Printed in the log.
+
+
+        val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.getDefault()) // Date Formatter
+        val date = sdf.format(dateTime) // dateTime is formatted in the given format.
+        Log.e("Formatted Date : ", "" + date) // Formatted date is printed in the log.
 
         lifecycleScope.launch {
-            historyDao.insert(HistoryEntity(date))
+            historyDao.insert(HistoryEntity(date)) // Add date function is called.
             Log.e(
-                "Date: ",
-                "Added: "
+                "Date : ",
+                "Added..."
             )
         }
     }
