@@ -49,16 +49,17 @@
             android:textSize="16sp"
             android:textStyle="bold" />
     </RadioGroup>
-    <!--END-->
+
+    <!-- Metric Unit Weight Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilMetricUnitWeight"
+        android:layout_below="@id/rgUnits"
         android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:boxStrokeColor="@color/colorAccent"
         app:hintTextColor="@color/colorAccent"
-        android:layout_below="@id/rgUnits"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:hintEnabled="true">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etMetricUnitWeight"
@@ -68,17 +69,18 @@
             android:inputType="numberDecimal"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
-    <!--positioned below tilMetricUnitWeight-->
+
+    <!-- Metric Unit Height Input -->
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@id/tilMetricUnitWeight"
         android:id="@+id/tilMetricUnitHeight"
-        app:boxStrokeColor="@color/colorAccent"
-        app:hintTextColor="@color/colorAccent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
+        android:layout_below="@id/tilMetricUnitWeight"
         android:layout_marginTop="10dp"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/colorAccent"
+        app:hintTextColor="@color/colorAccent"
+        app:hintEnabled="true">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etMetricUnitHeight"
@@ -88,51 +90,53 @@
             android:inputType="numberDecimal"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- US Unit Weight Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUsMetricUnitWeight"
+        android:layout_below="@id/rgUnits"
         android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:boxStrokeColor="@color/colorAccent"
         app:hintTextColor="@color/colorAccent"
-        android:layout_below="@id/rgUnits"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:hintEnabled="true">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etUsMetricUnitWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="WEIGHT (in kg)"
+            android:hint="WEIGHT (in lb)"
             android:inputType="numberDecimal"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
-    <!--positioned below tilMetricUnitWeight-->
 
-    <!--start-->
-    <!--Todo add us unit views-->
+    <!-- US Unit Height Input (Feet) -->
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@id/tilMetricUnitWeight"
         android:id="@+id/tilMetricUsUnitHeightFeet"
+        android:layout_below="@id/tilMetricUnitWeight"
+        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         app:boxStrokeColor="@color/colorAccent"
         app:hintTextColor="@color/colorAccent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentStart="true"
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_toStartOf="@id/view"
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        app:hintEnabled="true"
+        tools:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etUsMetricUnitHeightFeet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Feet"
+            android:hint="HEIGHT (in Ft)"
             android:inputType="numberDecimal"
             android:textSize="16sp" />
+
     </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <!-- Divider View -->
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
@@ -140,20 +144,22 @@
         android:layout_below="@+id/tilMetricUnitWeight"
         android:layout_centerHorizontal="true" />
 
+    <!-- US Unit Height Input (Inch) -->
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_below="@id/tilMetricUnitWeight"
         android:id="@+id/tilMetricUsUnitHeightInch"
-        app:boxStrokeColor="@color/colorAccent"
-        app:hintTextColor="@color/colorAccent"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tilMetricUnitWeight"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@id/view"
-        android:visibility="gone"
-        tools:visibility="visible"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:layout_marginStart="351dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="381dp"
+        android:layout_toEndOf="@+id/tilMetricUsUnitHeightFeet"
+        app:boxStrokeColor="@color/colorAccent"
+        app:hintEnabled="true"
+        app:hintTextColor="@color/colorAccent"
+        tools:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etUsMetricUnitHeightInch"
@@ -163,11 +169,9 @@
             android:inputType="numberDecimal"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
-    <!--end-->
 
-    <!--positioned below tilMetricUnitHeight-->
+    <!-- BMI Result Display -->
     <LinearLayout
-        android:padding="10dp"
         android:layout_below="@id/tilMetricUnitHeight"
         android:id="@+id/llDiplayBMIResult"
         android:layout_width="match_parent"
@@ -214,13 +218,13 @@
             android:textSize="18sp"
             tools:text="Normal" />
     </LinearLayout>
-    <!--positioned below llDiplayBMIResult-->
+
+    <!-- Calculate Button -->
     <Button
         android:id="@+id/btnCalculateUnits"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/llDiplayBMIResult"
-        android:layout_gravity="bottom"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -228,5 +232,5 @@
         android:backgroundTint="@color/colorAccent"
         android:text="CALCULATE"
         android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+        android:textSize="18sp"/>
 </RelativeLayout>

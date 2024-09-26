@@ -4,7 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#B2212121</color>
     <color name="colorPrimaryDark">#B2212121</color>
-    <color name="colorAccent">#008F24</color>
+    <color name="colorAccent">#4FABF7</color>
+    <color name="colorAccent1">#006494</color>
     <color name="lightGrey">#C4C4C4</color>
     <color name="toolbar_color_control_normal">#000000</color>
 </resources>

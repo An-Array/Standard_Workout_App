@@ -19,8 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        android:textStyle="bold"
         android:text="END"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorAccent1"
         android:textSize="35sp"/>
 
     <LinearLayout
@@ -28,6 +29,7 @@
         android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
+        android:backgroundTint="@color/colorAccent1"
         android:background="@drawable/item_circular_color_accent_border"
         android:gravity="center">
 
@@ -35,15 +37,18 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="start image"
+
         android:src="@drawable/ic_action_done"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Congratulations!"
-        android:textColor="#212121"
-        android:textSize="18sp" />
+        android:layout_margin="15dp"
+        android:textStyle="bold"
+        android:text="CONGRATULATIONS!"
+        android:textColor="#003554"
+        android:textSize="22sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,10 +62,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginHorizontal="10dp"
         android:layout_marginTop="35dp"
-        android:background="@color/colorAccent"
         android:text="FINISH"
-        android:textColor="#FFFFFF"
+        android:theme="@style/Button.Blue"
+        android:textColor="@color/white"
+        android:background="@color/colorAccent1"
         android:textSize="18sp"/>
 
 

@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
 
-                // Add code to navigate to the next activity here (e.g., startActivity)
+                // Add code to navigate to the next activity here
             } else {
                 // Invalid credentials, show an error message
                 Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()

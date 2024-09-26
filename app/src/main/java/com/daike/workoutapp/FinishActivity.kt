@@ -8,6 +8,7 @@ import com.daike.workoutapp.databinding.ActivityFinishBinding
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+
 class FinishActivity : AppCompatActivity() {
     private var binding: ActivityFinishBinding? = null
 

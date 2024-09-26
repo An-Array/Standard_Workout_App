@@ -1,5 +1,6 @@
 package com.daike.workoutapp
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +22,13 @@ class BMIActivity : AppCompatActivity() {
     private var binding: ActivityBmiBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("BMIActivity", "onCreate called")
         //inflate the layout
         binding = ActivityBmiBinding.inflate(layoutInflater)
         //connect the layout to this activity
         setContentView(binding?.root)
+
+        Log.d("BMIActivity", "Layout inflated and set")
 
         setSupportActionBar(binding?.toolbarBmiActivity)
         supportActionBar?.setDisplayHomeAsUpEnabled(true) //set back button
@@ -33,6 +37,7 @@ class BMIActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding?.rgUnits?.setOnCheckedChangeListener { _, checkedId: Int ->
+            Log.d("BMIActivity", "Unit selected: $checkedId")
 
             // Here if the checkId is METRIC UNITS view then make the view visible else US UNITS view.
             if (checkedId == R.id.rbMetricUnits) {
@@ -44,6 +49,7 @@ class BMIActivity : AppCompatActivity() {
         // END
         // Button will calculate the input values in Metric Units
         binding?.btnCalculateUnits?.setOnClickListener {
+            Log.d("BMIActivity", "Calculate button clicked")
             calculateUnits()
         }
 
@@ -52,6 +58,9 @@ class BMIActivity : AppCompatActivity() {
     private fun calculateUnits(){
         //TODO(Step 2 : Handling the current visible view and calculating US UNITS view input values if they are valid.)
         // START
+
+        Log.d("BMIActivity", "Calculating units with currentVisibleView: $currentVisibleView")
+
         if (currentVisibleView == METRIC_UNITS_VIEW) {
             // The values are validated.
             if (validateMetricUnits()) {
@@ -64,9 +73,11 @@ class BMIActivity : AppCompatActivity() {
 
                 // BMI value is calculated in METRIC UNITS using the height and weight value.
                 val bmi = weightValue / (heightValue * heightValue)
+                Log.d("BMIActivity", "BMI calculated (Metric): $bmi")
 
                 displayBMIResult(bmi)
             } else {
+                Log.w("BMIActivity", "Invalid metric units entered")
                 Toast.makeText(
                     this@BMIActivity,
                     "Please enter valid values.",
@@ -93,9 +104,11 @@ class BMIActivity : AppCompatActivity() {
                 // This is the Formula for US UNITS result.
                 // Reference Link : https://www.cdc.gov/healthyweight/assessing/bmi/childrens_bmi/childrens_bmi_formula.html
                 val bmi = 703 * (usUnitWeightValue / (heightValue * heightValue))
+                Log.d("BMIActivity", "BMI calculated (US): $bmi")
 
                 displayBMIResult(bmi) // Displaying the result into UI
             } else {
+                Log.w("BMIActivity", "Invalid US units entered")
                 Toast.makeText(
                     this@BMIActivity,
                     "Please enter valid values.",
@@ -110,6 +123,7 @@ class BMIActivity : AppCompatActivity() {
      * Function is used to make the METRIC UNITS VIEW visible and hide the US UNITS VIEW.
      */
     private fun makeVisibleMetricUnitsView() {
+        Log.d("BMIActivity", "Switching to Metric Units View")
         currentVisibleView = METRIC_UNITS_VIEW // Current View is updated here.
         binding?.tilMetricUnitWeight?.visibility = View.VISIBLE // METRIC  Height UNITS VIEW is Visible
         binding?.tilMetricUnitHeight?.visibility = View.VISIBLE // METRIC  Weight UNITS VIEW is Visible
@@ -124,6 +138,7 @@ class BMIActivity : AppCompatActivity() {
     }
 
     private fun makeVisibleUsUnitsView() {
+        Log.d("BMIActivity", "Switching to US Units View")
         currentVisibleView = US_UNITS_VIEW // Current View is updated here.
         binding?.tilMetricUnitHeight?.visibility = View.INVISIBLE // METRIC  Height UNITS VIEW is InVisible
         binding?.tilMetricUnitWeight?.visibility = View.INVISIBLE // METRIC  Weight UNITS VIEW is InVisible
@@ -145,8 +160,10 @@ class BMIActivity : AppCompatActivity() {
         var isValid = true
 
         if (binding?.etMetricUnitWeight?.text.toString().isEmpty()) {
+            Log.w("BMIActivity", "Weight input is empty")
             isValid = false
         } else if (binding?.etMetricUnitHeight?.text.toString().isEmpty()) {
+            Log.w("BMIActivity", "Height input is empty")
             isValid = false
         }
 
@@ -164,12 +181,15 @@ class BMIActivity : AppCompatActivity() {
 
         when {
             binding?.etUsMetricUnitWeight?.text.toString().isEmpty() -> {
+                Log.w("BMIActivity", "US Weight input is empty")
                 isValid = false
             }
             binding?.etUsMetricUnitHeightFeet?.text.toString().isEmpty() -> {
+                Log.w("BMIActivity", "US Height Feet input is empty")
                 isValid = false
             }
             binding?.etUsMetricUnitHeightInch?.text.toString().isEmpty() -> {
+                Log.w("BMIActivity", "US Height Inch input is empty")
                 isValid = false
             }
         }
@@ -217,6 +237,8 @@ class BMIActivity : AppCompatActivity() {
         // This is used to round the result value to 2 decimal values after "."
         val bmiValue = BigDecimal(bmi.toDouble()).setScale(2, RoundingMode.HALF_EVEN).toString()
 
+
+        Log.d("BMIActivity", "Displaying BMI result: $bmiValue")
         binding?.tvBMIValue?.text = bmiValue // Value is set to TextView
         binding?.tvBMIType?.text = bmiLabel // Label is set to TextView
         binding?.tvBMIDescription?.text = bmiDescription // Description is set to TextView
